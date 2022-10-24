@@ -10,6 +10,7 @@ use std::{fs::File, io::Write};
 use tokio::task;
 
 use sigstore::crypto::SigningScheme;
+use sigstore::rekor::models::pluggable_types::PluggableType;
 
 mod crypto;
 mod rekor_api;
@@ -194,7 +195,16 @@ async fn main() -> Result<(), anyhow::Error> {
         let uuid = log_entry.unwrap().uuid;
         let retrieved_entry = rekor_api::get_entry_by_uuid(&uuid).await.unwrap();
         println!("Retrieved log entry from Rekor by UUID... {}", uuid);
-        println!("{:#?}", retrieved_entry);
+        //println!("{:#?}", retrieved_entry);
+        
+        let spec = retrieved_entry.decode_body()?.spec;
+        let data = spec.data;
+        let encoded_cert = spec.signature.public_key;
+        let sig = spec.signature.content;
+
+        
+        //let ptype = body.get_type();
+        
     }
     anyhow::Ok(())
 }
