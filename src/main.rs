@@ -198,12 +198,13 @@ async fn main() -> Result<(), anyhow::Error> {
         //println!("{:#?}", retrieved_entry);
         
         let spec = retrieved_entry.decode_body()?.spec;
-        let data = spec.data;
+        //let data = spec.data;
         let encoded_cert = spec.signature.public_key;
         let sig = spec.signature.content;
 
+        //let decoded_cert = encoded_cert.decode()?;
         
-        //let ptype = body.get_type();
+        //println!("Got cert from pubkey field of Rekor entry: {:?}", decoded_cert);
         
     }
     anyhow::Ok(())
