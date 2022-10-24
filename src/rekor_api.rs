@@ -17,9 +17,10 @@ pub async fn create_log(
     const URL: &str = "https://example.com";
 
     let hash = Hash::new(AlgorithmKind::sha256, hash.to_string());
-    let data = Data::new(hash, Url::parse(URL)?);
+    let data = Data::new(hash);//, Url::parse(URL)?);
     let public_key = PublicKey::new(public_key.to_string());
-    let signature = Signature::new(KEY_FORMAT.to_string(), signature.to_string(), public_key);
+    //let signature = Signature::new(KEY_FORMAT.to_string(), signature.to_string(), public_key);
+    let signature = Signature::new(signature.to_string(), public_key);
     let spec = Spec::new(signature, data);
     let proposed_entry = ProposedEntry::Hashedrekord {
         api_version: API_VERSION.to_string(),

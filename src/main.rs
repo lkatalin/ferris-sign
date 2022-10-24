@@ -202,9 +202,9 @@ async fn main() -> Result<(), anyhow::Error> {
         let encoded_cert = spec.signature.public_key;
         let sig = spec.signature.content;
 
-        //let decoded_cert = encoded_cert.decode()?;
+        let decoded_cert = encoded_cert.decode()?;
         
-        //println!("Got cert from pubkey field of Rekor entry: {:?}", decoded_cert);
+        println!("Got cert from pubkey field of Rekor entry: {:?}", decoded_cert);
         
     }
     anyhow::Ok(())
